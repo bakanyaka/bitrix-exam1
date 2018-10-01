@@ -51,7 +51,7 @@ CJSCore::Init();
                         </div>
                     <?endif?>
                     <div class="frm-row">
-                        <a href="<?= $arParams["FORGOT_PASSWORD_URL"] ?>" class="btn-forgot"><?= GetMessage("AUTH_FORGOT_PASSWORD_2") ?></a>
+                        <a href="<?= $arResult["AUTH_FORGOT_PASSWORD_URL"] ?>" class="btn-forgot"><?= GetMessage("AUTH_FORGOT_PASSWORD_2") ?></a>
                     </div>
                     <div class="frm-row">
                         <div class="frm-chk">
@@ -79,7 +79,7 @@ CJSCore::Init();
                     <?endif?>
                 </form>
             </li>
-            <li><a href="<?= $arParams["REGISTER_URL"] ?>"><?= GetMessage("AUTH_REGISTER") ?></a></li>
+            <li><a href="<?= $arResult["AUTH_REGISTER_URL"] ?>"><?= GetMessage("AUTH_REGISTER") ?></a></li>
         <? else: ?>
             <li>
                 <a href="<?= $arResult["PROFILE_URL"] ?>"><?= $arResult["USER_NAME"] ?></a>

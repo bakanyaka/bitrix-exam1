@@ -5,7 +5,7 @@ use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 $assets = \Bitrix\Main\Page\Asset::getInstance();
-$dir = $APPLICATION->GetCurDir();
+$page = $APPLICATION->GetCurPage(false);
 ?>
 
 <!DOCTYPE html>
@@ -14,10 +14,6 @@ $dir = $APPLICATION->GetCurDir();
 <head>
     <?php
         $assets->addString('<meta http-equiv="X-UA-Compatible" content="IE=edge">');
-        $assets->addString('<meta charset="utf-8" />');
-        $assets->addString('<meta name="keywords" content="">');
-        $assets->addString('<meta name="description" content="">');
-        $assets->addString('<meta name="author" content="">');
         $assets->addString('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
         $assets->addCss(SITE_TEMPLATE_PATH . '/css/reset.css');
         $assets->addCss(SITE_TEMPLATE_PATH . '/css/style.css');
@@ -92,7 +88,7 @@ $dir = $APPLICATION->GetCurDir();
         </div>
     </nav>
     <!-- /nav -->
-    <? if($dir != '/'):?>
+    <? if($page != '/'):?>
 
         <!-- breadcrumbs -->
         <div class="breadcrumbs-box">
@@ -117,7 +113,7 @@ $dir = $APPLICATION->GetCurDir();
             <!-- content -->
             <div class="content">
                 <div class="cnt">
-                    <? if($dir != '/'):?>
+                    <? if($page != '/'):?>
                         <header>
                             <h1><? $APPLICATION->ShowTitle(false) ?></h1>
                         </header>
