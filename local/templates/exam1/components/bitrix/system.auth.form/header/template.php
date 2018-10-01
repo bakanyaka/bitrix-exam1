@@ -2,6 +2,7 @@
 
 if ($arResult ['SHOW_ERRORS'] == 'Y' && $arResult ['ERROR'])
     ShowMessage($arResult ['ERROR_MESSAGE']);
+
 CJSCore::Init();
 ?>
 <nav class="menu-block">
@@ -41,8 +42,16 @@ CJSCore::Init();
                         <input type="password" placeholder="<?= GetMessage("AUTH_PASSWORD") ?>" name="USER_PASSWORD"
                                maxlength="50" size="17" autocomplete="off"/>
                     </div>
+                    <?if ($arResult["CAPTCHA_CODE"]):?>
+                        <div class="frm-row">
+                            <?echo GetMessage("AUTH_CAPTCHA_PROMT")?>:<br />
+                            <input type="hidden" name="captcha_sid" value="<?echo $arResult["CAPTCHA_CODE"]?>" />
+                            <img src="/bitrix/tools/captcha.php?captcha_sid=<?echo $arResult["CAPTCHA_CODE"]?>" width="180" height="40" alt="CAPTCHA" /><br /><br />
+                            <input type="text" name="captcha_word" maxlength="50" value="" />
+                        </div>
+                    <?endif?>
                     <div class="frm-row">
-                        <a href="" class="btn-forgot"><?= GetMessage("AUTH_FORGOT_PASSWORD_2") ?></a>
+                        <a href="<?= $arParams["FORGOT_PASSWORD_URL"] ?>" class="btn-forgot"><?= GetMessage("AUTH_FORGOT_PASSWORD_2") ?></a>
                     </div>
                     <div class="frm-row">
                         <div class="frm-chk">
@@ -53,9 +62,24 @@ CJSCore::Init();
                     <div class="frm-row">
                         <input type="submit" name="Login" value="<?= GetMessage("AUTH_LOGIN_BUTTON") ?>">
                     </div>
+                    <?if($arResult["AUTH_SERVICES"]):?>
+                        <div class="frm-row">
+                            <?=GetMessage("socserv_as_user_form")?><br />
+                            <?
+                            $APPLICATION->IncludeComponent("bitrix:socserv.auth.form", "icons",
+                                array(
+                                    "AUTH_SERVICES" => $arResult["AUTH_SERVICES"],
+                                    "SUFFIX" => "form",
+                                ),
+                                $component,
+                                array("HIDE_ICONS" => "Y")
+                            );
+                            ?>
+                        </div>
+                    <?endif?>
                 </form>
             </li>
-            <li><a href="<? $arParams["REGISTER_URL"] ?>"><?= GetMessage("AUTH_REGISTER") ?></a></li>
+            <li><a href="<?= $arParams["REGISTER_URL"] ?>"><?= GetMessage("AUTH_REGISTER") ?></a></li>
         <? else: ?>
             <li>
                 <a href="<?= $arResult["PROFILE_URL"] ?>"><?= $arResult["USER_NAME"] ?></a>

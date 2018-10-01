@@ -63,7 +63,7 @@ $dir = $APPLICATION->GetCurDir();
                         "FORGOT_PASSWORD_URL" => "/login/?forgot_password=yes",
                         "PROFILE_URL" => "/login/user.php",
                         "REGISTER_URL" => "/login/?register=yes",
-                        "SHOW_ERRORS" => "N"
+                        "SHOW_ERRORS" => "Y"
                     )
                 );?>
             </div>
